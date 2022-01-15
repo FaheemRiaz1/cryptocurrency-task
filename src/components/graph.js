@@ -6,7 +6,6 @@ import Chart from 'chart.js/auto'
 import Grid from '@mui/material/Grid'
 
 export default function Graph (props) {
- 
   const dataBar = {
     labels: [
       props.rates[0].name,
@@ -19,6 +18,7 @@ export default function Graph (props) {
     ],
     datasets: [
       {
+        label: 'Price of Coins in Usd',
         data: [
           props.rates[0].priceUsd,
           props.rates[1].priceUsd,
@@ -65,13 +65,20 @@ export default function Graph (props) {
       <h2 className='graph-h2'>
         <b>Graphical analysis of Price of Currencies</b>
       </h2>
-      <Grid item={true} lg={7} md={8} sm={10} xs={10}>
+      <Grid item={true} lg={8} md={8} sm={10} xs={10}>
         <MDBContainer>
           <h3 className='mt-1'>Bar chart</h3>
           <Bar data={dataBar} options={barChartOptions} />
         </MDBContainer>
       </Grid>
-      <Grid item={true} lg={5} md={8} sm={10} xs={10}>
+      <Grid
+        item={true}
+        lg={4}
+        md={8}
+        sm={10}
+        xs={10}
+        style={{ borderLeft: '1px solid black' }}
+      >
         <MDBContainer>
           <h3 className='mt-1'>Pie chart</h3>
           <Doughnut data={dataBar} />

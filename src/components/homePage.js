@@ -51,15 +51,13 @@ export default function HomePage () {
   return (
     <div>
       <AppBar position='static'>
-        <Typography variant='h3' >
-        Top 10 Cryptocurrencies
-        </Typography>
+        <Typography variant='h3'>Top 10 Cryptocurrencies</Typography>
       </AppBar>
       <div className='d-flex flex-column'></div>
 
-      <div style={{ padding: '20%', paddingTop: '0%' }}>
+      <div className='home-main-div'>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 250 }} aria-label='simple table'>
+          <Table sx={{ minWidth: 150 }} aria-label='simple table'>
             <TableHead>
               <TableRow key={i + 1}>
                 <TableCell align='center'>Rank </TableCell>
@@ -82,14 +80,7 @@ export default function HomePage () {
                         : 0}
                     </TableCell>
                     <TableCell align='center'>
-                      <ListItemButton>
-                        <Link
-                          style={{
-                            color: 'black',
-                            textDecoration: 'none',
-                            alignContent: 'center',
-                            textAlign: 'center'
-                          }}
+                         <Link
                           to='/details'
                           state={{
                             id: price.id,
@@ -106,10 +97,7 @@ export default function HomePage () {
                           }}
                         >
                           <ListItemText primary={'Details'} />
-                          {/* <Button variant="contained" disabled={id!== undefined false: true}>Contained</Button>
-                           */}
                         </Link>
-                      </ListItemButton>
                     </TableCell>
                   </TableRow>
                 </TableBody>
