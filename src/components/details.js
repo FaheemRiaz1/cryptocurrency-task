@@ -40,7 +40,6 @@ export default function Details () {
       setVwap24Hr(location.state.vwap24Hr)
       setArray(location.state)
       setTopTen(location.state.topTen)
-      console.log(topTen)
     } else {
       navigate('/details')
     }
