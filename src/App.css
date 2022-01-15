@@ -24,15 +24,14 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.details-subdiv{
+  text-align: left;
+  padding: 5%;
+  padding-top: 1%;
+  border: 2px solid black;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.graph-h2{
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-top:1%;
 }
