@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper'
 import { Button } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
+import Logo from './logo.png'
 
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
@@ -21,15 +22,14 @@ export default function HomePage () {
   const navigate = useNavigate()
   var i = 0
   React.useEffect(() => {
-    navigate('/')
+    navigate('/currencyPrices')
   }, [])
 
   React.useEffect(() => {
     const getRate = () => {
       var array = []
-      axios.defaults.headers.post['Access-Control-Allow-Headers'] = '*'
-      axios.get('https://api.coincap.io/v2/assets').then(
-        response => {
+      axios.get('http://localhost:5000/currencyPrices').then(
+        (response, i) => {
           const price = response.data
           array.push(price)
           setRates(price['data'])
@@ -48,10 +48,14 @@ export default function HomePage () {
     }
     getRate()
   }, [])
+
   return (
     <div>
       <AppBar position='static'>
-        <Typography variant='h3'>Top 10 Cryptocurrencies</Typography>
+        <Typography variant='h3'>
+          <img src={Logo} alt='Logo.png' style={{ paddingRight: '1%' }} />
+          Top 10 Cryptocurrencies
+        </Typography>
       </AppBar>
       <div className='d-flex flex-column'></div>
 
@@ -80,24 +84,24 @@ export default function HomePage () {
                         : 0}
                     </TableCell>
                     <TableCell align='center'>
-                         <Link
-                          to='/details'
-                          state={{
-                            id: price.id,
-                            symbol: price.symbol,
-                            name: price.name,
-                            supply: price.supply,
-                            maxSupply: price.maxSupply,
-                            marketCapUsd: price.marketCapUsd,
-                            volumeUsd24Hr: price.volumeUsd24Hr,
-                            priceUsd: price.priceUsd,
-                            changePercent24Hr: price.changePercent24Hr,
-                            vwap24Hr: price.vwap24Hr,
-                            topTen: topTen
-                          }}
-                        >
-                          <ListItemText primary={'Details'} />
-                        </Link>
+                      <Link
+                        to='/details'
+                        state={{
+                          id: price.id,
+                          symbol: price.symbol,
+                          name: price.name,
+                          supply: price.supply,
+                          maxSupply: price.maxSupply,
+                          marketCapUsd: price.marketCapUsd,
+                          volumeUsd24Hr: price.volumeUsd24Hr,
+                          priceUsd: price.priceUsd,
+                          changePercent24Hr: price.changePercent24Hr,
+                          vwap24Hr: price.vwap24Hr,
+                          topTen: topTen
+                        }}
+                      >
+                        <ListItemText primary={'Details'} />
+                      </Link>
                     </TableCell>
                   </TableRow>
                 </TableBody>

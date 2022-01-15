@@ -63,7 +63,7 @@ export default function Graph (props) {
   return (
     <Grid container spacing={2}>
       <h2 className='graph-h2'>
-        <b>Graphical analysis of Price of Currencies</b>
+      <b>Graphical analysis of Price of Currencies</b>
       </h2>
       <Grid item={true} lg={8} md={8} sm={10} xs={10}>
         <MDBContainer>

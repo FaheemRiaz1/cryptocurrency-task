@@ -7,6 +7,7 @@ import '../App.css'
 import Graph from './graph'
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
+import Logo from './logo.png'
 
 export default function Details () {
   const location = useLocation()
@@ -49,6 +50,7 @@ export default function Details () {
     <div>
       <AppBar position='static'>
         <Typography variant='h3'>
+          <img src={Logo} alt='Logo.png' style={{ paddingRight: '1%' }} />
           Details of <b>{name}</b>
         </Typography>
       </AppBar>
@@ -120,12 +122,12 @@ export default function Details () {
                 </h3>
               </Grid>
               <Grid item xs={6}>
-                <b>V wap 24 hrs</b>
+                <b>Volume weighted average price</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {vwap24Hr !== undefined
                     ? Math.round(vwap24Hr)
                     : 'No data available'}
-                  %
+                  
                 </h3>
               </Grid>
             </Grid>
