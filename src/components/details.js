@@ -8,6 +8,7 @@ import Graph from './graph'
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
 import Logo from './logo.png'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 
 export default function Details () {
   const location = useLocation()
@@ -47,25 +48,25 @@ export default function Details () {
   }, [])
 
   return (
-    <div>
+    <div className='back-color'>
       <AppBar position='static'>
         <Typography variant='h3'>
           <img src={Logo} alt='Logo.png' style={{ paddingRight: '1%' }} />
           Details of <b>{name}</b>
         </Typography>
       </AppBar>
-      <div style={{ padding: '1%' }}>
+      <div style={{ padding: '1%'}}>
         <div className='details-subdiv'>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <b>Symbol:</b>{' '}
+                <b>Symbol:</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {symbol !== undefined ? symbol : 'No symbol available'}
                 </h3>
               </Grid>
               <Grid item xs={6}>
-                <b>Name</b>{' '}
+                <b>Name</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {name !== undefined ? name : 'No name available'}
                 </h3>
@@ -75,7 +76,7 @@ export default function Details () {
                 <b>Supply</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {supply !== undefined
-                    ? Math.round(supply)
+                    ? parseInt(supply * 100) / 100
                     : 'No supply data available'}
                 </h3>
               </Grid>
@@ -84,7 +85,7 @@ export default function Details () {
                 <b>Max Supply</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {maxSupply !== undefined
-                    ? Math.round(maxSupply)
+                    ? parseInt(maxSupply * 100) / 100
                     : 'No maximun supply data available'}
                 </h3>
               </Grid>
@@ -93,7 +94,7 @@ export default function Details () {
                 <b>Market Capital Usd</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {marketCapUsd !== undefined
-                    ? Math.round(marketCapUsd)
+                    ? parseInt(marketCapUsd * 100) / 100
                     : 'No market capacity Usd available'}
                 </h3>
               </Grid>
@@ -102,7 +103,7 @@ export default function Details () {
                 <b>Volume in Usd in last 24 hours</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {volumeUsd24Hr !== undefined
-                    ? Math.round(volumeUsd24Hr)
+                    ? parseInt(volumeUsd24Hr * 100) / 100
                     : 'No volume data available'}
                 </h3>
               </Grid>
@@ -110,24 +111,43 @@ export default function Details () {
               <Grid item xs={6}>
                 <b>Price in Usd</b>
                 <h3 style={{ fontWeight: 'bold' }}>
-                  {priceUsd !== undefined ? '$' + Math.round(priceUsd) : '0'}
+                  {priceUsd !== undefined
+                    ? '$' + parseInt(priceUsd * 100) / 100
+                    : '0'}
                 </h3>
               </Grid>
               <Grid item xs={6}>
-                <b>Change in 24 hours in percentage</b>
+                <b>Change in 24 hours change in percentage</b>
                 <h3 style={{ fontWeight: 'bold' }}>
-                  {changePercent24Hr !== undefined
-                    ? Math.round(changePercent24Hr) + '%'
-                    : 0 + '%'}
+                  {changePercent24Hr !== undefined ? (
+                    changePercent24Hr >= 0 ? (
+                      <p style={{ color: 'green' }}>
+                        <AiOutlineArrowUp
+                          size='2.9vw'
+                          style={{ paddingBottom: '1%' }}
+                        />
+                        {parseInt(changePercent24Hr * 1000) / 1000 + '%'}{' '}
+                      </p>
+                    ) : (
+                      <p style={{ color: 'red' }}>
+                        <AiOutlineArrowDown
+                          size='2.9vw'
+                          style={{ paddingBottom: '1%' }}
+                        />{' '}
+                        {parseInt(changePercent24Hr * 1000) / 1000 + '%'}{' '}
+                      </p>
+                    )
+                  ) : (
+                    0 + '%'
+                  )}
                 </h3>
               </Grid>
               <Grid item xs={6}>
                 <b>Volume weighted average price</b>
                 <h3 style={{ fontWeight: 'bold' }}>
                   {vwap24Hr !== undefined
-                    ? Math.round(vwap24Hr)
+                    ? parseInt(vwap24Hr * 100) / 100
                     : 'No data available'}
-                  
                 </h3>
               </Grid>
             </Grid>

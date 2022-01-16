@@ -13,6 +13,7 @@ import { Button } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
 import Logo from './logo.png'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
@@ -22,13 +23,13 @@ export default function HomePage () {
   const navigate = useNavigate()
   var i = 0
   React.useEffect(() => {
-    navigate('/currencyPrices')
+    navigate('/')
   }, [])
 
   React.useEffect(() => {
     const getRate = () => {
       var array = []
-      axios.get('http://localhost:5000/currencyPrices').then(
+      axios.get('http://localhost:5000/').then(
         (response, i) => {
           const price = response.data
           array.push(price)
@@ -43,14 +44,16 @@ export default function HomePage () {
           var topTen = sortByCount.slice(0, 10)
           setTopTen(topTen)
         },
-        error => {}
+        error => {
+          return (error)
+        }
       )
     }
     getRate()
   }, [])
 
   return (
-    <div>
+    <div className='back-color'>
       <AppBar position='static'>
         <Typography variant='h3'>
           <img src={Logo} alt='Logo.png' style={{ paddingRight: '1%' }} />
@@ -64,6 +67,7 @@ export default function HomePage () {
           <Table sx={{ minWidth: 150 }} aria-label='simple table'>
             <TableHead>
               <TableRow key={i + 1}>
+                <TableCell align='center'>SR </TableCell>
                 <TableCell align='center'>Rank </TableCell>
                 <TableCell align='center'>Coin Name </TableCell>
                 <TableCell align='center'>Rate</TableCell>
@@ -76,12 +80,31 @@ export default function HomePage () {
                   <TableRow key={price.id}>
                     <TableCell align='center'>{index + 1}</TableCell>
                     <TableCell align='center'>
+                      {price.rank !== undefined ? price.rank : 'rank'}
+                    </TableCell>
+
+                    <TableCell align='center'>
                       {price.id !== undefined ? price.id : 'name'}
                     </TableCell>
                     <TableCell align='center'>
-                      {price.priceUsd !== undefined
-                        ? Math.round(price.priceUsd)
-                        : 0}
+                      {price.priceUsd !== undefined ? (
+                        price.changePercent24Hr >= 0 ? (
+                          <p style={{ color: 'green' }}>
+                            <AiOutlineArrowUp size='1.4vw' style={{ paddingBottom: '1%' }}/>
+                            {parseInt(price.priceUsd * 100) / 100}
+                          </p>
+                        ) : (
+                          <p style={{ color: 'red' }}>
+                            <AiOutlineArrowDown
+                              size='1.4vw'
+                              style={{ paddingBottom: '1%' }}
+                            />
+                            {parseInt(price.priceUsd * 100) / 100}
+                          </p>
+                        )
+                      ) : (
+                        0
+                      )}
                     </TableCell>
                     <TableCell align='center'>
                       <Link

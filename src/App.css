@@ -10,9 +10,13 @@
   padding: 5%;
   padding-top: 1%;
   border: 2px solid black;
+  background-color:white
 }
 .graph-h2{
   align-items: center;
   border-bottom: 1px solid black;
   padding-top:1%;
+}
+.back-color{
+  background-color:#FFFDD0;
 }

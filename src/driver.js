@@ -8,7 +8,7 @@ export default function Driver () {
   return (
     <Router>
       <Routes>
-        <Route path='/currencyPrices' element={<Home />}></Route> 
+        <Route path='/' element={<Home />}></Route> 
         <Route path='/details' element={<Details />}></Route>
       </Routes>
     </Router>

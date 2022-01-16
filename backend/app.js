@@ -1,6 +1,5 @@
 const express = require('express');
 const request = require('request');
-
 const app = express();
 
 app.use((req, res, next) => {
@@ -8,12 +7,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/currencyPrices', (req, res) => {
+app.get('/', (req, res) => {
   request(
     { url: 'https://api.coincap.io/v2/assets' },
     (error, response, body) => {
       if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error' });
+        return res.status(500).json({ type: 'error',message: error });
         // message: error.message
       }
 

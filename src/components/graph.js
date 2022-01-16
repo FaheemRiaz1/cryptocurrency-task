@@ -30,11 +30,12 @@ export default function Graph (props) {
         ],
         backgroundColor: [
           'rgba(112, 40,145,0.9)',
-          'rgba(255, 165,0)',
+          'rgba(225, 92, 3)',
           'rgba(255, 0, 0)',
           'rgba(0, 0, 255)',
           'rgba(0, 128, 0)',
-          'rgba(255, 192, 203)'
+          'rgba(255, 192, 203)',
+          'rgba(255, 165,0)'
         ]
       }
     ]
@@ -63,7 +64,7 @@ export default function Graph (props) {
   return (
     <Grid container spacing={2}>
       <h2 className='graph-h2'>
-      <b>Graphical analysis of Price of Currencies</b>
+        <b>Graphical analysis of Price of Currencies</b>
       </h2>
       <Grid item={true} lg={8} md={8} sm={10} xs={10}>
         <MDBContainer>
