@@ -1,15 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
-import TableCell, { tableCellClasses } from '@mui/material/TableCell'
+import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Button } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
 import Logo from './logo.png'
@@ -18,22 +16,18 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 export default function HomePage () {
-  const [rates, setRates] = React.useState(['0'])
   const [topTen, setTopTen] = React.useState([''])
   const navigate = useNavigate()
   var i = 0
   React.useEffect(() => {
     navigate('/')
-  }, [])
+  }, [navigate])
 
   React.useEffect(() => {
     const getRate = () => {
-      var array = []
       axios.get('http://localhost:5000/').then(
-        (response, i) => {
+        response => {
           const price = response.data
-          array.push(price)
-          setRates(price['data'])
           var sortByCount = price['data'].sort(function (a, b) {
             return (
               (b.priceUsd !== undefined ? b.priceUsd : 0) -
@@ -45,7 +39,7 @@ export default function HomePage () {
           setTopTen(topTen)
         },
         error => {
-          return (error)
+          return error
         }
       )
     }
@@ -90,7 +84,10 @@ export default function HomePage () {
                       {price.priceUsd !== undefined ? (
                         price.changePercent24Hr >= 0 ? (
                           <p style={{ color: 'green' }}>
-                            <AiOutlineArrowUp size='1.4vw' style={{ paddingBottom: '1%' }}/>
+                            <AiOutlineArrowUp
+                              size='1.4vw'
+                              style={{ paddingBottom: '1%' }}
+                            />
                             {parseInt(price.priceUsd * 100) / 100}
                           </p>
                         ) : (
