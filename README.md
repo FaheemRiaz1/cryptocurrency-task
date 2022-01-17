@@ -14,7 +14,7 @@
 
 #### In 2nd terminal navigate to backend folder and run
 
-### `Nodemon app.js`
+### `nodemon app.js`
 
 ### To Visit App:
 
